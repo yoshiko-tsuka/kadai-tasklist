@@ -5,7 +5,8 @@
     <thead>
       <tr>
         <th>id</th>
-        <th>tasks contents</th></th>
+        <th>tasks contents</th>
+        <th>tasks status</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +14,7 @@
         <tr>
           <td><%= link_to task.id, task_path(task) %></td>
           <td><%= task.content %></td>
+          <td><%= task.status %></td>
         </tr>
       <% end %>
     </tbody>
