@@ -1,0 +1,19 @@
+<%= form_for(task) do |f| %>
+  <% if task.errors.any? %>
+    <div class="alert alert-warning">
+      <ul>
+        <% task.errors.full_messages.each do |task| %>
+          <li><%= task %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <%= f.label :content, 'task contents' %>
+    <%= f.text_field :content, class: 'form-control' %>
+  </div>
+  <%= link_to 'home', tasks_path, class: "btn btn-default" %>
+  <%= f.submit 'submit', class: 'btn btn-primary' %>
+<% end %>
