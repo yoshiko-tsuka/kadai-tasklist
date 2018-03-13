@@ -8,11 +8,22 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">taskList home</a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+          <% if logged_in? %>
+            <li><%= link_to 'home', user_path(current_user) %></li>
+          <% else %>
+            <li><a class="navbar-brand" href="/">taskList</a></li>
+          <% end %>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'new task registration', new_task_path %></li>
+          <% if logged_in? %>
+            <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+          <% else %>
+            <li><a href="/login">login</a></li>
+            <li><a href="/users/new">new registration</a></li>
+          <% end %>
         </ul>
       </div>
     </div>
