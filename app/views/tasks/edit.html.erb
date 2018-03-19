@@ -1,4 +1,6 @@
 <h1>edit the task</h1>
 <%= render 'layouts/error_messages', model: @task %>
-<%= render 'layouts/table', task: @task %>
+<div class="media-body">
+    <p><%= render 'layouts/table', task: @task %></p>
+</div>
 <%= render 'layouts/form', task: @task %>

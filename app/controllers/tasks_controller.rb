@@ -1,23 +1,19 @@
 class TasksController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:show, :edit, :update, :destroy]
   before_action :setting_task, only: [:show, :edit, :update, :destroy]
-  def index
-    @tasks = Task.order(created_at: :desc).page(params[:page]).per(3)
-  end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   def create
-    @task = Task.new(task_params)
-
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = 'task is registed!'
-      redirect_to @task
+      redirect_to current_user
     else
       flash.now[:danger] = 'failure to regist'
       render :new
@@ -30,7 +26,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash[:success] = 'task is updated!'
-      redirect_to @task
+      redirect_to current_user
     else
       flash.now[:danger] = 'failure to update '
       render :edit
@@ -38,10 +34,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    
     if @task.destroy
       flash[:success] = 'task is deleted!'
-      redirect_to tasks_url
+      redirect_to current_user
     else
       flash.now[:danger] = 'failure to delete '
       render :edit
@@ -53,7 +48,7 @@ class TasksController < ApplicationController
   # Strong Parameter
   
   def setting_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
   end
   
   def task_params

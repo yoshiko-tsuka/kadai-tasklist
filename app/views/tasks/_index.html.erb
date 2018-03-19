@@ -1,0 +1,10 @@
+<ul class="media-list">
+  <% tasks.each do |task| %>
+    <li class="media">
+      <div class="media-body">
+        <p><%= render 'layouts/table', task: task %></p>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate tasks %>
+</ul>

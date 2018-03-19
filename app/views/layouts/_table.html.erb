@@ -1,16 +1,16 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>id</th>
-      <th>task contents</th>
-      <th>task status</th>
+      <th class="col-md-6">contents</th>
+      <th class="col-md-4">status</th>
+      <th class="col-md-2">created time</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><%= @task.id %></td>
-      <td><%= @task.content %></td>
-      <td><%= @task.status %></td>
+      <td><%= link_to task.content, task_path(task) %> </td>
+      <td><%= task.status %></td>
+      <td><%= task.user.name %><span class="text-muted">posted at <%= task.created_at.strftime("%Y/%m/%d") %></span></td>
     </tr>
   </tbody>
 </table>
